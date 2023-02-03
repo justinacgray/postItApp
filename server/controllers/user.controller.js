@@ -29,6 +29,8 @@ module.exports = {
     },
     login: (req, res) => {
         User.findOne({ email: req.body.email })
+        // todo User.findOne({username: req.body.username})
+        // todo add logic to sign in via email or username
             // promise
             // if success
             .then((userRecord) => {
@@ -39,6 +41,7 @@ module.exports = {
                     // email not found
                     res.status(400).json({ message: "Invalid!!!!" })
                 }
+                // Todo add logic to check for empty req.body
                 else {
                     // email is found
                     // salted 10x and returns BOOLEAN t/f
@@ -48,15 +51,17 @@ module.exports = {
                             if (isPasswordValid) {
                                 console.log("password is valid", isPasswordValid)
                                 res.cookie(
-                                    // naming of the cookie
+                                    // naming of the cookie- it's called "usertokent!"
                                     "usertoken",
                                     // signing the cookie
                                     // sign is going to take in payload which is going to be all the info (credentials) that we want to encrypt 
                                     jwt.sign(
                                         // this will be jumbled nonsense
                                         // this is the data that will be in the cookie
+                                        // THIS IS THE PAYLOAD!!!!
+                                        // we are setting "id" to the User's id (_id)
                                         {
-                                            id: userRecord._id,
+                                            id: userRecord._id,  
                                             email: userRecord.email,
                                             username: userRecord.username
                                         },

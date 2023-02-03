@@ -2,7 +2,7 @@ const NoteController = require('../controllers/note.controller')
 
 
 module.exports = (app) => {
-    // app.post("/api/notes/create-note", UserController.createNote)
+    app.post("/api/notes/create-note", NoteController.createNote)
     // app.get("/api/notes/view-all-notes", UserController.viewAllNotes)
     // app.get("/api/notes/view/:id", UserController.viewOneNote)
     // app.update("/api/notes/update/:id", UserController.updateNote)
