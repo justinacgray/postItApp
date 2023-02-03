@@ -8,3 +8,4 @@ module.exports = (app) => {
     // app.update("/api/notes/update/:id", UserController.updateNote)
     // app.delete("/api/notes/delete/:id", UserController.deleteNote)
 }
+
