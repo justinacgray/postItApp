@@ -108,19 +108,34 @@ module.exports = {
         res.json({message: "You have successfully logged out! "})
     },
 
-    getOneUser: (req,res) => {
-        User.findOne({_id : req.params.id})
-        // if successful 
-        .then((oneUser) => {
-            console.log("oneUser ===>", oneUser)
-            res.json(oneUser)
-        })
+    getLoggedInUser: async (req,res) => {
+        console.log("inside getlogged")
+        // User.findOne({ _id : req.jwtpayload.id})
+        // .then(user => res.json(user))
+        // .catch(err => res.json(err))
+        try {
+            const loggedinUser = await User.findOne({_id : req.jwtpayload.id})
+            console.log("LoggedInUser", loggedinUser)
+            res.status(200).json(loggedinUser)
+        }
         // if failure
-        .catch((err) => {
-            console.log("%%%%--ERR--%%%%", err)
+        catch(err) {
+            console.log("%%%%--ERROR hold-up--%%%%", err)
             res.status(400).json(err)
-        })
+        }
+    },
+    findAllUsers: async (req, res) => {
+        try {
+            const getUsers = await User.find()
+            res.status(200).json(getUsers)
+        } 
+        catch(err) {
+            console.log("ERROR, something went wrong getting all users", err)
+            res.status(400).json(err)
+        }
+
     }
+
 
 }
 

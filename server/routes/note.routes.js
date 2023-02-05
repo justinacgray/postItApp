@@ -1,11 +1,12 @@
 const NoteController = require('../controllers/note.controller')
-
+const {authenticate} = require('../config/jwt.config')
 
 module.exports = (app) => {
-    app.post("/api/notes/create-note", NoteController.createNote)
-    // app.get("/api/notes/view-all-notes", UserController.viewAllNotes)
-    // app.get("/api/notes/view/:id", UserController.viewOneNote)
-    // app.update("/api/notes/update/:id", UserController.updateNote)
-    // app.delete("/api/notes/delete/:id", UserController.deleteNote)
+    app.post("/api/notes/create-note", authenticate, NoteController.createNote)
+    app.get("/api/notes/view-all-notes",authenticate, NoteController.getAllNotes)
+    app.get("/api/notes/:username/get-all", authenticate, NoteController.findAllNotesByUser)
+    app.get("/api/notes/view/:id",authenticate, NoteController.getOneNote)
+    app.put("/api/notes/update/:id", authenticate,NoteController.updateNote)
+    app.delete("/api/notes/delete/:id",authenticate, NoteController.deleteNote)
 }
 

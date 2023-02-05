@@ -10,12 +10,19 @@ const app = express();
 
 connectDB()
 
-app.use(express.json(),express.urlencoded({ extended: true }));
-app.use(cors({
-    origin: "http://localhost:3000"
-}));
+app.use(express.static("public"));
 
-app.use(cookieParser())
+app.use(express.json());
+app.use(
+    cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    })
+);
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
 
 // routes for our models
 require("./routes/user.routes")(app);

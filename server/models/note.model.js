@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 // const moment = require('moment-timezone');
 // const dateEastCoast = moment.tz('America/New_York').format('ha z');
-// console.log(dateEastCoast)
+// console.log("DATETIME", dateEastCoast)
 
 const NoteSchema = new mongoose.Schema({
     title: {
@@ -21,8 +21,8 @@ const NoteSchema = new mongoose.Schema({
     },
     dueDate: {
         type: Date,
-        min: Date.now,
-        default: Date.now,
+        min: new Date(),
+        default: new Date()
     
     },
     categoryType: {
@@ -38,7 +38,7 @@ const NoteSchema = new mongoose.Schema({
     
 }, {timestamps: true});
 
-const Note = mongoose.model('modelName', NoteSchema);
+const Note = mongoose.model('Note', NoteSchema);
 
 module.exports = Note;
 
