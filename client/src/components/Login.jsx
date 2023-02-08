@@ -1,17 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Navigate, useParams } from 'react-router-dom'
 
 const Login = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  // const navigate = Navigate()
+  const { username } = useParams()
+
+  const userLogin = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:7000/api/users/login', {
+      email: email,
+      password: password
+    },
+      {
+        // helps sets cookies values
+        withCredentials: true,
+
+      }
+    )
+      .then((res) => {
+        console.log("RESPONSE ==>", res)
+        // navigate(`/dashboard`)
+      })
+      .catch((err) => {
+        console("ERROR ===>", err)
+        setErrorMessage('err.response.data.message')
+      })
+  }
+
   return (
-    <div className="login slide-up">
-        <div className="center">
-          <h2 className="form-title" id="login"><span>or</span>Log in</h2>
-          <div className="form-holder">
-            <input type="email" className="input" placeholder="Email" />
-            <input type="password" className="input" placeholder="Password" />
-          </div>
-          <button className="submit-btn">Log in</button>
-        </div>
-      </div>
+    <>
+      <p className='error-text'> {errorMessage ? errorMessage : null} </p>
+      <form onSubmit={userLogin} className="input-group" id='login'>
+        <input type="email" className="input-field" placeholder="Email" name="email" value={email} required />
+        <input type="password" className="input-field" placeholder="Password" name="password" value={password} required/>
+        <button className="submit-btn">Log in</button>
+      </form>
+    </>
   )
 }
 

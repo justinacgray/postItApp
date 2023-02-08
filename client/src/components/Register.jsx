@@ -59,34 +59,23 @@ const Register = () => {
 
   return (
     <>
-      <h2 className="form-title" id="signup"><span>or</span>Sign up</h2>
       {confirmReg ? <h4 style={{color: "green"}}> {confirmReg} </h4> : null}
-      <form className="signup" onSubmit={registerUser}>
+      <form id= 'register' className="input-group" onSubmit={registerUser}>
         <div className="form-holder">
-          <input type="text" className="input" placeholder="Username" name="username" value={user.username} onChange={handleInputChange} />
-          {errors.username ? (<span className="error-text"> {errors.username.message} </span>) : null}
-
-          <input type="text" className="input" placeholder="First Name" name="firstName" value={user.firsName} onChange={handleInputChange} />
-          {errors.firstName ? (<span className="error-text"> {errors.firstName.message} </span>) : null}
-
-
-          <input type="text" className="input" placeholder="Last Name" name="lastName" value={user.lastName} onChange={handleInputChange}  />
-          {errors.lastName ? (<span className="error-text"> {errors.lastName.message} </span>) : null}
-
-
-          <input type="email" className="input" placeholder="Email" name='email' value={user.email} onChange={handleInputChange}  />
-          {errors.email ? (<span className="error-text"> {errors.email.message} </span>) : null}
-
-
-          <input type="password" className="input" placeholder="Password" name='password' value={user.password} onChange={handleInputChange}  />
-          {errors.password ? (<span className="error-text"> {errors.password.message} </span>) : null}
-
-
-          <input type="password" className="input" placeholder="Confirm Password" name='confirmPassword' value={user.confirmPassword} onChange={handleInputChange}  />
-          {errors.confirmPassword ? (<span className="error-text"> {errors.confirmPassword.message} </span>) : null}
-
+          <input type="text" className="input-field" placeholder="Username" name="username" value={user.username} onChange={handleInputChange} />
+            {errors.username ? (<span className="error-text"> {errors.username.message} </span>) : null}
+          <input type="text" className="input-field" placeholder="First Name" name="firstName" value={user.firsName} onChange={handleInputChange} />
+            {errors.firstName ? (<span className="error-text"> {errors.firstName.message} </span>) : null}
+          <input type="text" className="input-field" placeholder="Last Name" name="lastName" value={user.lastName} onChange={handleInputChange}  />
+            {errors.lastName ? (<span className="error-text"> {errors.lastName.message} </span>) : null}
+          <input type="email" className="input-field" placeholder="Email" name='email' value={user.email} onChange={handleInputChange}  />
+            {errors.email ? (<span className="error-text"> {errors.email.message} </span>) : null}
+          <input type="password" className="input-field" placeholder="Password" name='password' value={user.password} onChange={handleInputChange}  />
+            {errors.password ? (<span className="error-text"> {errors.password.message} </span>) : null}
+          <input type="password" className="input-field" placeholder="Confirm Password" name='confirmPassword' value={user.confirmPassword} onChange={handleInputChange}  />
+            {errors.confirmPassword ? (<span className="error-text"> {errors.confirmPassword.message} </span>) : null}
         </div>
-        <button className="submit-btn">Sign up</button>
+        <button className="submit-btn">Register</button>
       </form>
     </>
   )

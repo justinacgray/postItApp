@@ -11,7 +11,8 @@ function App() {
           <Routes>
             <Route path='/' element={<LogReg />} />
             <Route path='/create-note' element={<Form/>} />
-            <Route path='/dashboard/:username' element={<Dashboard/>} />
+            {/* <Route path='/dashboard/:username' element={<Dashboard/>} /> */}
+            <Route path='/dashboard' element={<Dashboard/>} />
             {/* <Route path='view-note/:id' element={< />} /> */}
             {/* // <Route path='edit-note/:id' element={< />} /> */}
           </Routes>
