@@ -1,13 +1,20 @@
-import React from 'react'
+import React, {useRef, useEffect} from 'react'
 import Login from '../components/Login'
 import Register from '../components/Register'
 // import '../scss/LogReg.scss'
 import '../css/LogReg.css'
 
+
 const LogReg = () => {
+  const ref = useRef(null); // ref => { current: null }
+
+  useEffect(() => {
+    // The DOM element is accessible here.
+    console.log(ref.current);
+  }, []);
 
   const toggleToReg = (e) => {
-    
+
   }
 
   const toggleToLogin = (e) => {
