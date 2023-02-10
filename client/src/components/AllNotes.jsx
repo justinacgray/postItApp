@@ -11,7 +11,7 @@ const AllNotes = () => {
     //need to use axios to get all products from the backend server
   
     // useEffect(() => {
-    //     axios.get("http://localhost:8000/api/")
+    //     axios.get("http://localhost:7000/api/")
     //     .then((res) => {
     //         console.log(res.data);
     //         //set the new data in our state from my api
@@ -27,7 +27,7 @@ const AllNotes = () => {
     // }
 
     // const deleteProduct = (notesId) => {
-    //     axios.delete("http://localhost:8000/api/delete/")
+    //     axios.delete("http://localhost:7000/api/delete/")
     //         .then(res => {
     //             removeFromDom(notesId);
     //             // navigate upon success 
@@ -42,6 +42,8 @@ const AllNotes = () => {
     <div>
       
       All Notes Goes HEre
+
+      {/* view one component will be render here */}
 
     </div>
   )

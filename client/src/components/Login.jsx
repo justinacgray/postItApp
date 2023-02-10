@@ -24,7 +24,7 @@ const Login = () => {
     )
       .then((res) => {
         console.log("RESPONSE ==>", res)
-        // navigate(`/dashboard`)
+        // todo => upon success navigate where?
       })
       .catch((err) => {
         console("ERROR ===>", err)
