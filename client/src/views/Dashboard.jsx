@@ -23,7 +23,7 @@ const Dashboard = () => {
   
   return (
     <div id='layout'>
-      <aside>
+      <aside className='sidebar'>
         <div>
           <button onClick={() => setModalToggle(true)}>
             Let's Post Something
@@ -31,7 +31,7 @@ const Dashboard = () => {
         {modalToggle && <NewNote closeModal={setModalToggle} /> }
         </div>
       </aside>
-      <main>
+      <main className='main-body'>
         <AllNotes />
         {/* <EditNote /> */}
       </main>

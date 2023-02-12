@@ -1,8 +1,21 @@
-#layout {
-    display: flex; /*Flexbox definition */
+#layout{
+    display: flex;    
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(45deg, hsla(213, 77%, 14%, 1) 0%, hsla(202, 27%, 45%, 1) 100%);
+}
+
+.sidebar {
+    /* position: fixed; */
+    width: 240px;
+    /* left: -240px; */
+    height: 100%;
+    background-color: #fff;
+    transition: all .5s ease;
 
 }
 
-aside, main {
-    border: 3px solid purple;
+
+.main-body {
+
 }

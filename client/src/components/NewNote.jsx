@@ -4,9 +4,9 @@ import axios from 'axios'
 
 const NewNote = ({closeModal}) => {
 
-  // todo => finish create function and pass down props to Form Compoent 
+  // todo => finish create function and pass down props to Form Component  
 
-  const [newNote, setNewNotes] = useState({
+  const [newNote, setNewNote] = useState({
     title : "",
     text : "",
     isUrgent : "",
@@ -15,13 +15,15 @@ const NewNote = ({closeModal}) => {
   })
   const [errors, setErrors] = useState({});
   
-   const handleCreate = (e) => {
+  const handleCreate = (e) => {
         //the e (event) prevents the default
         e.preventDefault();
         // call axios to post the object to my api
-        axios.post("http://localhost:7000/api/products/new", {
-            
-        })
+        axios.post("http://localhost:7000/api/notes/create-note", newNote, 
+            {
+              withCredentials: true
+            }
+        )
         //on success, redirect to product list
         .then((res) => {
             console.log(res.data);
@@ -45,7 +47,7 @@ const NewNote = ({closeModal}) => {
   return (
     <div>
       {/* pass state down to form */}
-      <Form closeModal={closeModal} submitForm={handleCreate} />
+      <Form closeModal={closeModal} submitForm={handleCreate} note={newNote} setNote={setNewNote} errors={errors} setErrors={setErrors}/>
     </div>
   )
 }

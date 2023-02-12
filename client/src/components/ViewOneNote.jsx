@@ -8,8 +8,19 @@ import { useParams } from 'react-router-dom'
 const ViewOneNote = () => {
 
   const {id} = useParams()
-
   const [oneSingleNote, setOneSingleNote ] = useState({})
+
+  useEffect(() => {
+    // axios to call the data
+    axios.get(`http://localhost:7000/api/notes/view/${id}`) 
+    .then((res) => {
+        console.log(res.data);
+        setOneSingleNote(res.data); 
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}, []);
 
   const deleteProduct = (noteId) => {
     axios.delete(`http://localhost:7000/api/notes/delete/${id}`)
@@ -21,17 +32,6 @@ const ViewOneNote = () => {
         })
     }
 
-  useEffect(() => {
-    // axios to call the data
-    axios.get(`http://localhost:7000/api/notes/${}`) 
-    .then((res) => {
-        console.log(res.data);
-        setOneSingleNote(res.data.product); 
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-}, []);
 
   return (
     <div>
