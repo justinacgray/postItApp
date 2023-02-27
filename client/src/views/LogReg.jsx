@@ -31,7 +31,7 @@ const LogReg = () => {
     setLogShift("50px")
     setBtnShift("110px")
   }
-  console.log(regShift, logShift, btnShift)
+  // console.log(regShift, logShift, btnShift)
 
   return (
     <div className="hero">
