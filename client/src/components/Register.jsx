@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const Register = () => {
+const Register = ({regShift}) => {
 
   const [confirmReg, setConfirmReg] = useState("")
   const [errors , setErrors] = useState({})
@@ -60,7 +60,7 @@ const Register = () => {
   return (
     <>
       {confirmReg ? <h4 style={{color: "green"}}> {confirmReg} </h4> : null}
-      <form id= 'register' className="input-group" onSubmit={registerUser}>
+      <form id= 'register' style= {{ left :regShift }} className="input-group" onSubmit={registerUser} >
         <div className="form-holder">
           <input type="text" className="input-field" placeholder="Username" name="username" value={user.username} onChange={handleInputChange} />
             {errors.username ? (<span className="error-text"> {errors.username.message} </span>) : null}

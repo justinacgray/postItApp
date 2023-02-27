@@ -22,6 +22,7 @@
     background-color: #fff;
     padding: 5px;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .button-box {
@@ -83,9 +84,9 @@
 }
 
 #login {
-    left: 50px;
+    left: 450px;
 }
 
 #register {
-    left: 450px;
+    left: 50px;
 }

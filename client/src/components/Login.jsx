@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Navigate, useParams } from 'react-router-dom'
 
-const Login = () => {
+const Login = ({logShift}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
@@ -32,12 +32,16 @@ const Login = () => {
       })
   }
 
+  const handleInputChange = () => {
+    console.log("logging in")
+  }
+
   return (
     <>
       <p className='error-text'> {errorMessage ? errorMessage : null} </p>
-      <form onSubmit={userLogin} className="input-group" id='login'>
-        <input type="email" className="input-field" placeholder="Email" name="email" value={email} required />
-        <input type="password" className="input-field" placeholder="Password" name="password" value={password} required/>
+      <form onSubmit={userLogin} className="input-group" id='login' style= {{left: logShift}}>
+        <input type="email" className="input-field" placeholder="Email" name="email" value={email} onChange={handleInputChange} required />
+        <input type="password" className="input-field" placeholder="Password" name="password" value={password} onChange={handleInputChange} required/>
         <button className="submit-btn">Log in</button>
       </form>
     </>
