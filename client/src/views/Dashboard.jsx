@@ -23,28 +23,22 @@ const Dashboard = () => {
 
   return (
     <div className='dash-body'>
+      <a id="nav-expand" href="#">
+        <span class="icon icon-menu"></span>&nbsp;
+        Menu
+      </a>
       <nav>
-        <input type="checkbox" name="" id="side-menu-switch" />
-        <div className="side-menu">
-          <form action="">
-            <input type="text" placeholder="Search For Note" />
-            <button>
-              <i className="fas fa-search"></i>
-            </button>
-          </form>
-          <Link to="" onClick={() => setModalToggle(true)}><i className="fas fa-gavel"></i>Create a Note!</Link>
-          <label htmlFor="side-menu-switch">
-            <i className="fas fa-angle-left"></i>
-          </label>
-        </div>
-      {modalToggle && <NewNote closeModal={setModalToggle} /> }
+        <a id="nav-collapse" href="#">
+          <span class="icon icon-cross"></span>
+        </a>
+        <Link to="" onClick={() => setModalToggle(true)}><i className="fas fa-gavel"></i>Create a Note!</Link>
       </nav>
-      <main >
-      <AllNotes  />
-      {/* <EditNote /> */}
-
+      <main>
+        <h2>Todo </h2>
+        {modalToggle && <NewNote closeModal={setModalToggle} /> } 
+        
       </main>
-      
+
     </div>
   )
 }
