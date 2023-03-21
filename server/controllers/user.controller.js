@@ -34,9 +34,10 @@ module.exports = {
             // promise
             // if success
             .then((userRecord) => {
+                console.log("*****************", req.body.email) // undefined
                 // check if this returned obj is null
                 // email does not exist
-                console.log("userRECORD ===>", userRecord)
+                console.log("userRECORD from backend ===>", userRecord)
                 if (userRecord === null) {
                     // email not found
                     res.status(400).json({ message: "Invalid!!!!" })

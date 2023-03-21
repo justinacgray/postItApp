@@ -6,7 +6,7 @@ import Form from './views/Form'
 import Dashboard from './views/Dashboard'
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState("")
+  const [user_Id, setUser_Id] = useState({})
 
 
 
@@ -15,10 +15,10 @@ function App() {
     <div>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<LogReg loggedUser={loggedUser} />} />
+            <Route path='/' element={<LogReg user_Id={user_Id} setUser_Id ={setUser_Id} />} />
             <Route path='/create-note' element={<Form/>} />
             {/* <Route path='/dashboard/:username' element={<Dashboard/>} /> */}
-            <Route path='/dashboard' element={<Dashboard loggedUser={loggedUser} />} />
+            <Route path='/dashboard' element={<Dashboard user_Id={user_Id} setUser_Id={setUser_Id} />} />
             {/* <Route path='view-note/:id' element={< />} /> */}
             {/* // <Route path='edit-note/:id' element={< />} /> */}
           </Routes>

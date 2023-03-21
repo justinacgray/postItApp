@@ -5,13 +5,13 @@ import Register from '../components/Register'
 import '../css/LogReg.css'
 
 
-const LogReg = () => {
+const LogReg = (props) => {
   // const ref = useRef(null); // ref => { current: null }
   // useEffect(() => {
   //   // The DOM element is accessible here.
   //   console.log(ref.current);
   // }, []);
-
+  const {user_Id, setUser_Id} = props
   const [toggle, settoggle] = useState(false)
   const [visiable, setvisiable] = useState("")
 
@@ -41,8 +41,8 @@ const LogReg = () => {
           <button type='button'  className='toggle-btn' onClick={regToggle}>Register</button>
           <button type='button' className='toggle-btn' onClick={loginToggle}>Login</button>
         </div>
-          <Register regShift={regShift} />
-          <Login logShift={logShift} />
+          <Register regShift={regShift} user_Id={user_Id} setUser_Id ={setUser_Id} />
+          <Login logShift={logShift} user_Id={user_Id} setUser_Id ={setUser_Id} />
         </div>
     </div>
   )

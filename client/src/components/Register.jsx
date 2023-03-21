@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Register = ({regShift}) => {
+const Register = ({regShift, user_Id, setUser_Id}) => {
 
+  const navigate = useNavigate()
   const [confirmReg, setConfirmReg] = useState("")
   const [errors , setErrors] = useState({})
 
@@ -25,6 +27,7 @@ const Register = ({regShift}) => {
     })
     .then((res) => {
       console.log(res.data)
+      setUser_Id(res.data.user)
       // resetting
       setUser({
         username: "",
@@ -38,6 +41,7 @@ const Register = ({regShift}) => {
         "Thank you for registering, you may now log in"
       )
       setErrors({}) // remember to reset errors state if it was successful
+      navigate('/dashboard')
     })
     .catch((err) => {
       console.log('ERROR FROM FRONTEND', err)
@@ -59,7 +63,6 @@ const Register = ({regShift}) => {
 
   return (
     <>
-      {confirmReg ? <h4 style={{color: "green"}}> {confirmReg} </h4> : null}
       <form id= 'register' style= {{ left :regShift }} className="input-group" onSubmit={registerUser} >
         <div className="form-holder">
           <input type="text" className="input-field" placeholder="Username" name="username" value={user.username} onChange={handleInputChange} />
@@ -76,6 +79,7 @@ const Register = ({regShift}) => {
             {errors.confirmPassword ? (<span className="error-text"> {errors.confirmPassword.message} </span>) : null}
         </div>
         <button className="submit-btn">Register</button>
+      {confirmReg ? <h4 style={{color: "green"}}> {confirmReg} </h4> : null}
       </form>
     </>
   )

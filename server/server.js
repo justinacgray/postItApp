@@ -10,16 +10,17 @@ const app = express();
 
 connectDB()
 
-app.use(express.static("public"));
 
-app.use(express.json());
+// 
+app.use(express.urlencoded({ extended: true })); //middleware parses incoming request from the body
+app.use(express.json());// middleware -> this allows all requests in format of json
 app.use(
     cors({
-    credentials: true,
-    origin: "http://localhost:3000",
+        credentials: true,
+        origin: "http://localhost:3000",
     })
-);
-app.use(express.urlencoded({ extended: true }));
+    );
+app.use(express.static("public"));
 app.use(cookieParser());
 
 
