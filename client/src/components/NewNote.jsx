@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useForm } from "react-hook-form";
 import Form from '../views/Form'
 import axios from 'axios'
 
 const NewNote = ({closeModal}) => {
+  // const {errors} = useForm();
 
   // todo => finish create function and pass down props to Form Component  
 
@@ -16,6 +18,7 @@ const NewNote = ({closeModal}) => {
   const [errors, setErrors] = useState({});
   
   const handleCreate = (e) => {
+    console.log('FORM --->', newNote)
         //the e (event) prevents the default
         e.preventDefault();
         // call axios to post the object to my api
@@ -28,14 +31,14 @@ const NewNote = ({closeModal}) => {
         .then((res) => {
             console.log(res.data);
             //if we have validation errors NOT errors with server
-            if(res.data.error){
-                setErrors(res.data.error.errors)
-                // console.log("CHECKING SOMETHING");
-            }
-            else {
-                // on success 
-                // navigate 
-            }
+            // if(res.data.error){
+            //     setErrors(res.data.error.errors)
+            //     console.log("CHECKING SOMETHING");
+            // }
+            // else {
+            //     // on success 
+            //     // navigate 
+            // }
         })
         //on failure, save errors in state so the user can correct the incorrect inputs
         .catch((err) => {

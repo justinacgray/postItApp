@@ -27,7 +27,7 @@ const NoteSchema = new mongoose.Schema({
     },
     categoryType: {
         type: String,
-        enum: ['personal', 'work', 'other'],
+        enum: ['other', 'work', 'personal'],
 		default: 'other'    
     }, 
     // how we do one-to-many in Mongoose

@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/Form.css'
 
 const Form = ({ submitForm, closeModal, setNote, note }) => {
-
+  
   const handleInputChange = (e) => {
     setNote ({
       // making a copy of user (spread operator)
@@ -13,9 +13,11 @@ const Form = ({ submitForm, closeModal, setNote, note }) => {
   }
 
 
+
+
   return (
     <div className='modalBackground'>
-      <form className="form-container" onSumbit={submitForm}>
+      <form className="form-container" onSubmit={submitForm}>
         <button onClick={() =>closeModal(false)}>X</button>
         <div>
           <header>
@@ -28,16 +30,18 @@ const Form = ({ submitForm, closeModal, setNote, note }) => {
 
           <section>
           {/* <label htmlFor="isUrgent">Is this post urgent</label> */}
-            <select name="isUrgent" id="" value={note.isUrgent} onChange={handleInputChange} >
-              <option>Not Urgent</option>
-              <option>Urgent</option>
+            <select name="isUrgent" id="isUrgent" value={note.isUrgent} onChange={handleInputChange} >
+              <option>Please Choose One</option>
+              <option value='false'>Not Urgent</option>
+              <option value='true'>Urgent</option>
             </select>
 
           {/* <label htmlFor="categoryType">What kind of post it this?</label> */}
-            <select name="categoryType" id="" value={note.categoryType} onChange={handleInputChange} >
-              <option>Other</option>
-              <option>Work</option>
-              <option>Personal</option>
+            <select name="categoryType" id="categoryType" value={note.categoryType} onChange={handleInputChange} >
+            <option>Please Choose One</option>
+              <option value='other'>Other</option>
+              <option value='work'>Work</option>
+              <option value='personal'>Personal</option>
             </select>
           </section>
 

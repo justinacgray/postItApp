@@ -19,7 +19,33 @@ module.exports = {
                 res.json({
                     successManager: "Thank you for registering",
                     user: newUser
-                })
+                }).cookie(
+                    // naming of the cookie- it's called "usertokent!"
+                    "usertoken",
+                    // signing the cookie
+                    // sign is going to take in payload which is going to be all the info (credentials) that we want to encrypt 
+                    jwt.sign(
+                        // this will be jumbled nonsense
+                        // this is the data that will be in the cookie
+                        // THIS IS THE PAYLOAD!!!!
+                        // we are setting "id" to the User's id (_id)
+                        {
+                            id: user._id,  
+                            email: user.email,
+                            username: user.username
+                        },
+                        // we need a key to sign and hash cookie's data
+                        // our payload need a secret_key. We will use a .env file to store such things privately 
+                        // they will not be added to public code
+                        process.env.JWT_SECRET
+                    ),
+                    // configuration settings for our cookie
+                    // make sure these cookies are "HttpOnly". This means that the cookies are essentially invisible to client-side JS and only be read server-side
+                    {
+                        httpOnly: true,
+                        expires: new Date(Date.now() + 9000000) //can change the time if desired
+                    }
+                )
             })
             .catch((err) => {
                 console.log("UNsuccessful")
