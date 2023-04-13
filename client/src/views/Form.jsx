@@ -1,62 +1,54 @@
 import React from 'react'
 import '../css/Form.css'
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 
-const Form = ({ submitForm, closeModal, setNote, note }) => {
+
+const Form = ({ submitForm, closeModal }) => {
+
+  const schema = yup.object().shape({
+    title: yup.string().min(4, 'Title must be at least 4 characters').max(20, 'Title must be at least 20 characters').required(),
+    text: yup.string().min(10, 'Minimum text requirement is 10 characters').max(255, "Text can't be greater than 255 characters").required(),
+    dueDate: yup.date().required(),
+  })
+  const { register, handleSubmit, formState: {errors} } = useForm({
+    resolver: yupResolver(schema)
+  });
   
-  const handleInputChange = (e) => {
-    setNote ({
-      // making a copy of user (spread operator)
-      ...note,
-      // adding a key based on the e.target.name
-      [e.target.name] : e.target.value,
-    })
-  }
-
-
-
 
   return (
-    <div className='modalBackground'>
-      <form className="form-container" onSubmit={submitForm}>
-        <button onClick={() =>closeModal(false)}>X</button>
-        <div>
-          <header>
-            <h1>What would you like to post?</h1>
-          </header>
-          <section>
-            <input type="text" name="title" className="" placeholder="Title of Note" value={note.title} onChange={handleInputChange} />
-            <input type="date" name="dueDate" className="" placeholder="" value={note.dueDate} onChange={handleInputChange} />
-          </section>
+    <div className='modal-container'>
+      <form className="inner-modal-container" onSubmit={handleSubmit(submitForm)}>
+        <section className="modal-header">
+          <h2>Create a Post</h2>
+          <button onClick={() => closeModal(false)}>X</button>
+        </section>
+        <main className='modal-body'>
+          <p>{errors.title ? errors.title.message : null} </p>
+          <input name="title" type="text" placeholder="Title of Note" {...register("title", { required: true })}  />
 
-          <section>
-          {/* <label htmlFor="isUrgent">Is this post urgent</label> */}
-            <select name="isUrgent" id="isUrgent" value={note.isUrgent} onChange={handleInputChange} >
-              <option>Please Choose One</option>
-              <option value='false'>Not Urgent</option>
-              <option value='true'>Urgent</option>
-            </select>
+          <p>{errors.dueDate ? errors.dueDate.message : null} </p>
+          <input name="dueDate" type="date" placeholder="Due Date" {...register("dueDate", { required: true})}  />
 
-          {/* <label htmlFor="categoryType">What kind of post it this?</label> */}
-            <select name="categoryType" id="categoryType" value={note.categoryType} onChange={handleInputChange} >
-            <option>Please Choose One</option>
-              <option value='other'>Other</option>
-              <option value='work'>Work</option>
-              <option value='personal'>Personal</option>
-            </select>
-          </section>
+          <label htmlFor="isUrgent">Is this post urgent</label>
+          <input type="checkbox" placeholder="Urgent?" {...register("isUrgent")} />
 
-          <section>
-          <textarea name="text" className="" value={note.text} placeholder="What do you want to post?" onChange={handleInputChange} ></textarea>
-          </section>
+          <label htmlFor='categoryType' >Category</label>
+          <select name="categoryType" {...register("categoryType")} >
+            <option value="other">Other</option>
+            <option value="work"> Work</option>
+            <option value="personal">  Personal</option>
+          </select>
 
-          <footer>
-          <input type="submit" onClick={() =>closeModal(false)} value="Nevermind, cancel" />
-          <input type="submit" value="Post it!" />
-          </footer>
-        </div>
+          <p>{errors.text ? errors.text.message : null} </p>
+          <textarea {...register("text", {})} />
+        </main>
+
+        <section className="modal-footer">
+          <input className="btn btn-primary" type="submit" value="Post it!" />
+        </section>
       </form>
-
-
     </div>
   )
 }

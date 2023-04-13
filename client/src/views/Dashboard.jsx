@@ -50,10 +50,10 @@ const Dashboard = ({user_Id, setUser_Id}) => {
         <Link to="" onClick={() => setModalToggle(true)}><i className="fas fa-gavel"></i>Create a Note!</Link>
       </nav>
       <main>
-        <h1>{JSON.stringify(user_Id)}</h1>
-        <h2>Todo </h2>
+        <h2>{user_Id._id}</h2>
+        <h2>Posts</h2>
         {modalToggle && <NewNote closeModal={setModalToggle} /> } 
-        
+        <AllNotes  />
       </main>
 
     </div>

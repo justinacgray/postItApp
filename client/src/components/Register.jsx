@@ -47,7 +47,6 @@ const Register = ({regShift, user_Id, setUser_Id}) => {
       console.log('ERROR FROM FRONTEND', err)
       setErrors(err.response.data.errors)
     })
-
   }
 
   // using a single function to update the state object
@@ -67,7 +66,7 @@ const Register = ({regShift, user_Id, setUser_Id}) => {
         <div className="form-holder">
           <input type="text" className="input-field" placeholder="Username" name="username" value={user.username} onChange={handleInputChange} />
             {errors.username ? (<span className="error-text"> {errors.username.message} </span>) : null}
-          <input type="text" className="input-field" placeholder="First Name" name="firstName" value={user.firsName} onChange={handleInputChange} />
+          <input type="text" className="input-field" placeholder="First Name" name="firstName" value={user.firstName} onChange={handleInputChange} />
             {errors.firstName ? (<span className="error-text"> {errors.firstName.message} </span>) : null}
           <input type="text" className="input-field" placeholder="Last Name" name="lastName" value={user.lastName} onChange={handleInputChange}  />
             {errors.lastName ? (<span className="error-text"> {errors.lastName.message} </span>) : null}
