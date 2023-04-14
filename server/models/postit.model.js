@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // const dateEastCoast = moment.tz('America/New_York').format('ha z');
 // console.log("DATETIME", dateEastCoast)
 
-const NoteSchema = new mongoose.Schema({
+const PostItSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true,"Title is required!"],
@@ -23,7 +23,6 @@ const NoteSchema = new mongoose.Schema({
         type: Date,
         min: new Date(),
         default: new Date()
-    
     },
     categoryType: {
         type: String,
@@ -38,7 +37,7 @@ const NoteSchema = new mongoose.Schema({
     
 }, {timestamps: true});
 
-const Note = mongoose.model('Note', NoteSchema);
+const Post = mongoose.model('Post', PostItSchema);
 
-module.exports = Note;
+module.exports = Post;
 

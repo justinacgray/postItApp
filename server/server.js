@@ -27,6 +27,6 @@ app.use(cookieParser());
 
 // routes for our models
 require("./routes/user.routes")(app);
-require("./routes/note.routes")(app);
+require("./routes/postit.routes")(app);
 
 app.listen( port, () => console.log(`Listening on port: ${port}`) );

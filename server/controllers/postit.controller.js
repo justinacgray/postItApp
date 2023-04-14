@@ -1,15 +1,15 @@
-const Note = require('../models/note.model')
+const Post = require('../models/postit.model')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.model')
 
-const NoteController = {
+const PostItController = {
     // Create
-    createNote: async (req,res)=>{    
-        newNoteObject = new Note(req.body) //creating a new instance of Note
+    createPost: async (req,res)=>{    
+        newPostObject = new Post(req.body) //creating a new instance of Post
         console.log("REQ BODY ++++++++++>", req.body)
-        // first step is grab decoded jwt (json webtoken) because we need to attach the userID to the Note instance. 
+        // first step is grab decoded jwt (json webtoken) because we need to attach the userID to the Post instance. 
         // remember when our user logs in they're sending a cookie with this json webtoken with encrypted data
-        // we need to decode and then attach that to our Note instance aka object
+        // we need to decode and then attach that to our Post instance aka object
         // decode is a method of jsonwebtoken and we use the help of the cookie-parser to make it work
         // decode from out request from the client 
         // usertoken is what we name our token from our models
@@ -20,16 +20,16 @@ const NoteController = {
         // const decodedJWT = jwt.decode(req.cookies.usertoken, {
         //     complete: true
         // })
-        // newNoteObject.createdBy = decodedJWT.payload.id
+        // newPostObject.createdBy = decodedJWT.payload.id
 
         // ______________________________________
-        newNoteObject.createdBy = req.jwtpayload.id
+        newPostObject.createdBy = req.jwtpayload.id
 
         // using save method because it works better for manipulating instance object
-        console.log("newNoteObject -->", newNoteObject)
+        console.log("newPostObject -->", newPostObject)
         try {
-            const newNote = await newNoteObject.save()
-            res.status(200).json(newNote)
+            const newPost = await newPostObject.save()
+            res.status(200).json(newPost)
             }
         catch(err) {
             console.log(" ///ERROR///", err)
@@ -44,12 +44,12 @@ const NoteController = {
     },
 
     //Read All
-    getAllNotes: async (req,res) => {
+    getAllPosts: async (req,res) => {
         try {
-            const allNotes = await Note.find()
+            const allPosts = await Post.find()
             // populated function that references the "User" model and can attach any of the properties we mentioned in our User model
             .populate("createdBy", "username email createdAt")
-            res.status(200).json(allNotes)
+            res.status(200).json(allPosts)
         }
         catch(err){
             console.log("ERROR in GETALLL --->", err)
@@ -57,18 +57,18 @@ const NoteController = {
         }
     },
     // todo add async/await
-    // findAllNotesByUser
-    findAllNotesByUser: (req, res) => {
+    // findAllPostsByUser
+    findAllPostsByUser: (req, res) => {
         // using our payload from our middleware so we are not decoding the cookie everytime
         if(req.jwtpayload.username !== req.params.username) {
             // person not logged in, seeing who they are
             console.log("not logged in user")
             User.findOne({username : req.params.username})
             .then((userNotLoggedIn) => {
-                Note.find({createdBy: userNotLoggedIn._id})
-                .then((allNotesFromUser) => {
-                    console.log("ALL NOTES By User --->", allNotesFromUser)
-                    res.json(allNotesFromUser)
+                Post.find({createdBy: userNotLoggedIn._id})
+                .then((allPostsFromUser) => {
+                    console.log("ALL PostS By User --->", allPostsFromUser)
+                    res.json(allPostsFromUser)
                 })
                 .catch((err) => {
                     console.log("ERROR with GETALL by User", err)
@@ -82,48 +82,48 @@ const NoteController = {
         }
         else {
             console.log("current user")
-            Note.find({createdBy: req.jwtpayload.id})
-            .then((allNotesFromLoggedInUser) => {
-                console.log("allNotesByLoggedInUSer", allNotesFromLoggedInUser)
-                res.json(allNotesFromLoggedInUser)
+            Post.find({createdBy: req.jwtpayload.id})
+            .then((allPostsFromLoggedInUser) => {
+                console.log("allPostsByLoggedInUSer", allPostsFromLoggedInUser)
+                res.json(allPostsFromLoggedInUser)
             })
             .catch((err) => {
-                console.log("ERROR can't getnotes from logged in user!!!", err)
+                console.log("ERROR can't getPosts from logged in user!!!", err)
                 res.status(400).json(err)
             })
         }
 
     },
     // todo these routes work but any loggedin user can delete/update
-    // frontend logic to make sure only loggedin user can delete/update note
+    // frontend logic to make sure only loggedin user can delete/update Post
     //Read One
-    getOneNote: async (req,res)=>{
+    getOnePost: async (req,res)=>{
         try {
-            oneNote = await Note.find({_id:req.jwtpayload.id})
-            console.log("oneNote", oneNote)
-            res.status(200).json(oneNote)
+            onePost = await Post.find({_id:req.jwtpayload.id})
+            console.log("onePost", onePost)
+            res.status(200).json(onePost)
         }
         catch(err) {
             res.status(400).json({message:"There has been a getOne error",error:err})
         }
     },
     //Update
-    updateNote: async (req,res)=>{
+    updatePost: async (req,res)=>{
         try {
-            const updateNote = await Note.findOneAndUpdate({_id:req.jwtpayload.id},req.body,{new:true,runValidators:true})
-            console.log("updatedNote", updateNote)
-            res.status(200).json(updateNote) //passing data to update
+            const updatePost = await Post.findOneAndUpdate({_id:req.jwtpayload.id},req.body,{new:true,runValidators:true})
+            console.log("updatedPost", updatePost)
+            res.status(200).json(updatePost) //passing data to update
         }
         catch(err) {
             res.status(400).json({message:"There has been an update error",error:err})
         }
     },
     //Delete
-    deleteNote: async (req,res)=>{
+    deletePost: async (req,res)=>{
         try {
-            const deleteNote = await Note.findOneAndDelete(req.jwtpayload.id)
-            console.log("deleteNote", deleteNote)
-            res.status(200).json(deleteNote) //pass in your deleted data to return
+            const deletePost = await Post.findOneAndDelete(req.jwtpayload.id)
+            console.log("deletePost", deletePost)
+            res.status(200).json(deletePost) //pass in your deleted data to return
         }
         catch(err) {
             res.status(400).json({message:"There has been an update error",error:err})
@@ -132,4 +132,4 @@ const NoteController = {
 
 }
 
-module.exports = NoteController
+module.exports = PostItController

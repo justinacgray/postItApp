@@ -15,12 +15,10 @@ module.exports = {
             // here is our promise
             .then((newUser) => {
                 console.log("newUSer", newUser)
+                console.log("USERRRRr---->", user)
                 console.log("Successfully Registered")
-                res.json({
-                    successManager: "Thank you for registering",
-                    user: newUser
-                }).cookie(
-                    // naming of the cookie- it's called "usertokent!"
+                res.cookie(
+                    // naming of the cookie- it's called "usertoken!"
                     "usertoken",
                     // signing the cookie
                     // sign is going to take in payload which is going to be all the info (credentials) that we want to encrypt 
@@ -30,9 +28,9 @@ module.exports = {
                         // THIS IS THE PAYLOAD!!!!
                         // we are setting "id" to the User's id (_id)
                         {
-                            id: user._id,  
-                            email: user.email,
-                            username: user.username
+                            id: newUser._id,  
+                            email: newUser.email,
+                            username: newUser.username
                         },
                         // we need a key to sign and hash cookie's data
                         // our payload need a secret_key. We will use a .env file to store such things privately 
@@ -45,7 +43,11 @@ module.exports = {
                         httpOnly: true,
                         expires: new Date(Date.now() + 9000000) //can change the time if desired
                     }
-                )
+                ).json({
+                    successManager: "Thank you for registering",
+                    userLogged: newUser.username,
+                    userId: newUser._id
+                })
             })
             .catch((err) => {
                 console.log("UNsuccessful")
