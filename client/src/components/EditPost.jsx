@@ -6,10 +6,10 @@ import { useParams } from 'react-router-dom'
   // todo => finish edit function and pass down props to Form Compoent 
 
 
-const EditNote = ({closeModal}) => {
+const EditPost = ({closeModal}) => {
   const {id} = useParams()
 
-  const [editNote, setEditNote] = useState({
+  const [editPost, setEditPost] = useState({
     title : "",
     text : "",
     isUrgent : "",
@@ -22,7 +22,7 @@ const EditNote = ({closeModal}) => {
         //the e (event) prevents the default
         e.preventDefault();
         // call axios to post the object to my api
-        axios.put(`http://localhost:8000/api/notes/${id}`, {
+        axios.put(`http://localhost:8000/api/posts/${id}`, {
             
         })
         //on success, redirect to product list
@@ -45,7 +45,7 @@ const EditNote = ({closeModal}) => {
     }
 
     useEffect(() => {
-      axios.get(`http://localhost:8000/api/notes/${id}`)
+      axios.get(`http://localhost:8000/api/posts/${id}`)
       .then(res => {
           console.log(res);
         // bring state in
@@ -60,4 +60,4 @@ const EditNote = ({closeModal}) => {
   )
 }
 
-export default EditNote
+export default EditPost

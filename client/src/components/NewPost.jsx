@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from '../views/Form'
 import axios from 'axios'
 
-const NewNote = ({closeModal}) => {
+const NewPost = ({closeModal}) => {
   const navigate = useNavigate()
 
   // todo => finish create function and pass down props to Form Component  
@@ -11,7 +11,7 @@ const NewNote = ({closeModal}) => {
   const handleCreate = (data) => {
     console.log("data -->",data)        
         // call axios to post the object to my api
-        axios.post("http://localhost:7000/api/notes/create-note", data, 
+        axios.post("http://localhost:7000/api/posts/create-post", data, 
             {
               withCredentials: true
             }
@@ -19,7 +19,7 @@ const NewNote = ({closeModal}) => {
         //on success, redirect to product list
         .then((res) => {
             console.log(res.data);
-            // todo -> put new new note in allNotes array
+            // todo -> put new new post in allPosts array
             // state doesn't update unless manually rendered 
             closeModal(!closeModal)
         })
@@ -38,4 +38,4 @@ const NewNote = ({closeModal}) => {
   )
 }
 
-export default NewNote
+export default NewPost

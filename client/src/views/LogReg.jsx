@@ -6,11 +6,7 @@ import '../css/LogReg.css'
 
 
 const LogReg = (props) => {
-  // const ref = useRef(null); // ref => { current: null }
-  // useEffect(() => {
-  //   // The DOM element is accessible here.
-  //   console.log(ref.current);
-  // }, []);
+
   const {user_Id, setUser_Id} = props
   const [toggle, settoggle] = useState(false)
   const [visiable, setvisiable] = useState("")

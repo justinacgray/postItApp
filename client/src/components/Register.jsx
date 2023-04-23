@@ -27,7 +27,7 @@ const Register = ({regShift, user_Id, setUser_Id}) => {
     })
     .then((res) => {
       console.log(res.data)
-      setUser_Id(res.data.user)
+      setUser_Id(res.data.userId)
       // resetting
       setUser({
         username: "",
@@ -66,6 +66,7 @@ const Register = ({regShift, user_Id, setUser_Id}) => {
         <div className="form-holder">
           <input type="text" className="input-field" placeholder="Username" name="username" value={user.username} onChange={handleInputChange} />
             {errors.username ? (<span className="error-text"> {errors.username.message} </span>) : null}
+            {/* {errors.username?.kind == "unique" ? (<span className="error-text"> {errors.username.message} </span>) : null} */}
           <input type="text" className="input-field" placeholder="First Name" name="firstName" value={user.firstName} onChange={handleInputChange} />
             {errors.firstName ? (<span className="error-text"> {errors.firstName.message} </span>) : null}
           <input type="text" className="input-field" placeholder="Last Name" name="lastName" value={user.lastName} onChange={handleInputChange}  />

@@ -26,7 +26,7 @@ const Form = ({ submitForm, closeModal }) => {
         </section>
         <main className='modal-body'>
           <p>{errors.title ? errors.title.message : null} </p>
-          <input name="title" type="text" placeholder="Title of Note" {...register("title", { required: true })}  />
+          <input name="title" type="text" placeholder="Title of Post" {...register("title", { required: true })}  />
 
           <p>{errors.dueDate ? errors.dueDate.message : null} </p>
           <input name="dueDate" type="date" placeholder="Due Date" {...register("dueDate", { required: true})}  />
