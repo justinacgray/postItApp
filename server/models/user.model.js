@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+// https://www.npmjs.com/package/mongoose-unique-validator can use {PATH} {VALUE} {TYPE} ="unique" or "required"
+const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: [true,"Username is required!"],
-        minLength: [5,"Field requires minimum of 2 characters!"],
+        required: [true," {PATH} is {TYPE} !"],
+        minLength: [5,"Field requires minimum of 5 characters!"],
         maxLength: [50, "Username must be no longer than 50 characters"],
-        unique: [true, "Username is already taken"],
+        unique: true,
         trim: true
 
     },
@@ -29,7 +31,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         lowercase: true,
-        unique: [true, "Email already in use"],
+        unique: true,
         required: [true, "Email address is required"],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
@@ -43,6 +45,8 @@ const UserSchema = new mongoose.Schema({
     },
 }, {timestamps: true});
 
+// to use unique validator (even though it's NOT a validator)
+UserSchema.plugin(uniqueValidator, { message: '{VALUE} is already taken.' });
 
 UserSchema.virtual("confirmPassword")
     .get(() => this._confirmPassword)
