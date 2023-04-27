@@ -21,7 +21,6 @@ const PostItSchema = new mongoose.Schema({
     },
     dueDate: {
         type: Date,
-        min: new Date(),
         default: new Date()
     },
     categoryType: {

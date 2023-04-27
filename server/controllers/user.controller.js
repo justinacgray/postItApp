@@ -139,6 +139,7 @@ module.exports = {
 
     getLoggedInUser: async (req,res) => {
         console.log("inside getlogged")
+        console.log("JWT ID", req.jwtpayload)
         // User.findOne({ _id : req.jwtpayload.id})
         // .then(user => res.json(user))
         // .catch(err => res.json(err))
