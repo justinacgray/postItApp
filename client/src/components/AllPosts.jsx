@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { Button, Card} from 'react-bootstrap';
+import { PostContext } from '../context/PostContext';
 
 
 const AllPosts = () => {
 
   //create an array to hold all posts
   //set State to update the page for each new postit added
-  const [postsArray, setPostsArray] = useState([]);
+  const {postsArray, setPostsArray}  = useContext(PostContext)
   //need to use Effect to immediately the data on the page
   //need to use axios to get all products from the backend server
 
@@ -16,7 +17,7 @@ const AllPosts = () => {
       .then((res) => {
         console.log(res.data);
         //set the new data in our state from my api
-        setPostsArray(res.data); // needded to add .products my response was a new object with a key of products and the value is the array of product objects
+        setPostsArray(res.data); // needed to add .products my response was a new object with a key of products and the value is the array of product objects
       })
       .catch((err) => {
         console.log(err);

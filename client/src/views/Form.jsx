@@ -1,6 +1,6 @@
 import React from 'react'
 import '../css/Form.css'
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
 
@@ -8,13 +8,13 @@ import {yupResolver} from '@hookform/resolvers/yup'
 const Form = ({ submitForm, closeModal }) => {
 
   const schema = yup.object().shape({
-    title: yup.string().min(4, 'Title must be at least 4 characters').max(20, 'Title must be at least 20 characters').required(),
+    title: yup.string().min(4, 'Title must be at least 4 characters').max(20, 'Title must be less than 20 characters').required(),
     text: yup.string().min(10, 'Minimum text requirement is 10 characters').max(255, "Text can't be greater than 255 characters").required(),
     dueDate: yup.date().typeError('Date is required').required(),
     isUrgent: yup.boolean(),
     categoryType: yup.string().required()
   })
-  const { register, handleSubmit, control, formState: {errors}, clearErrors  } = useForm({
+  const { register, handleSubmit, formState: {errors}  } = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {
@@ -25,11 +25,6 @@ const Form = ({ submitForm, closeModal }) => {
       categoryType: "other"
     }
   });
-  
-  const { dirtyFields } = useFormState({
-    control
-  });
-
 
   return (
     <div className='modal-container'>
@@ -39,8 +34,13 @@ const Form = ({ submitForm, closeModal }) => {
           <button onClick={() => closeModal(false)}>X</button>
         </section>
         <main className='modal-body'>
-          {dirtyFields.title && <p>Title needs to be minimum 4 characters. </p> } 
-          <input name="title" type="text" placeholder="Title of Post" {...register("title", { required: true })}  />
+          {errors.title && <p>{errors.title.message} </p> } 
+          <input name="title" type="text" placeholder="Title of Post" {
+            ...register("title", { 
+              required: true,  
+              onChange: (e) => {},
+              onBlur: (e) => {}, })}  
+              />
 
           <p>{errors.dueDate ? errors.dueDate.message : null} </p>
           <input name="dueDate" type="date" placeholder="Due Date" {...register("dueDate", { required: true})}  />
@@ -55,7 +55,7 @@ const Form = ({ submitForm, closeModal }) => {
             <option value="personal">  Personal</option>
           </select>
 
-          {dirtyFields.text && <p>Text needs to be minimum 10 characters. </p> } 
+          {errors.text && <p>{errors.text.message}</p> } 
           <textarea {...register("text", {})} />
         </main>
 

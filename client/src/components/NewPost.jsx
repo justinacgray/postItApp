@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Form from '../views/Form'
 import axios from 'axios'
+import { PostContext } from '../context/PostContext';
 
 const NewPost = ({closeModal}) => {
   const navigate = useNavigate()
+  const {postsArray, setPostsArray}  = useContext(PostContext)
 
   // todo => finish create function and pass down props to Form Component  
   
@@ -16,11 +18,10 @@ const NewPost = ({closeModal}) => {
               withCredentials: true
             }
         )
-        //on success, redirect to product list
+        //on success, redirect to post list
         .then((res) => {
             console.log(res.data);
-            // todo -> put new new post in allPosts array
-            // state doesn't update unless manually rendered 
+            setPostsArray([...postsArray, res.data]) 
             closeModal(!closeModal)
         })
         //on failure, save errors in state so the user can correct the incorrect inputs
