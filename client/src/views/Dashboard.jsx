@@ -70,8 +70,7 @@ const logout = (e) => {
         <a onClick={() => setModalToggle(true)}><i className="fas fa-gavel"></i>Create a Post!</a>
       </nav>
       <main>
-        <h2>{user_Id._id}</h2>
-        <h2>Posts</h2>
+        <h2>{user_Id._id} Posts</h2>
         {modalToggle && <NewPost closeModal={setModalToggle} /> } 
         <AllPosts  />
       </main>
