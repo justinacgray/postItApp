@@ -3,6 +3,7 @@ import axios from 'axios'
 import '../css/All_Posts.css'
 import { Button, Card} from 'react-bootstrap';
 import { PostContext } from '../context/PostContext';
+import PaginationItems from './PaginationItems'
 
 
 const AllPosts = () => {
@@ -42,11 +43,11 @@ const AllPosts = () => {
 
 
   return (
-    <div className='pots-container'>
+    <div className='posts-container'>
 
       All Posts Goes HEre
 
-      {
+      {/* {
         postsArray.map((onePost, index) => (
           <Card key={index} className="card-container">
             <Card.Header className='card-header'>{onePost.title} {onePost.dueDate}</Card.Header>
@@ -61,7 +62,8 @@ const AllPosts = () => {
           </Card>
 
         ))
-      }
+      } */}
+      <PaginationItems />
 
     </div>
   )
