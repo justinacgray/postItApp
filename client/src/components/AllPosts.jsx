@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
+import '../css/All_Posts.css'
 import { Button, Card} from 'react-bootstrap';
 import { PostContext } from '../context/PostContext';
 
@@ -41,20 +42,20 @@ const AllPosts = () => {
 
 
   return (
-    <div>
+    <div className='pots-container'>
 
       All Posts Goes HEre
 
       {
         postsArray.map((onePost, index) => (
-          <Card key={index} className="text-center">
-            <Card.Header>{onePost.title} {onePost.dueDate}</Card.Header>
-            <Card.Body>
-              <Card.Title>{onePost.title}</Card.Title>
-              <Card.Text>
+          <Card key={index} className="card-container">
+            <Card.Header className='card-header'>{onePost.title} {onePost.dueDate}</Card.Header>
+            <Card.Body className='card-body'>
+              <Card.Title className='card-title'>{onePost.title}</Card.Title>
+              <Card.Text className='card-text' >
                 {onePost.text}
               </Card.Text>
-              <Button variant="primary">Edit {onePost.title}</Button>
+              <Button className= '' variant="primary">Edit {onePost.title}</Button>
             </Card.Body>
             <Card.Footer className="text-muted">Created {onePost.updatedAt}</Card.Footer>
           </Card>

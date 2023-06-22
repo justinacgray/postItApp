@@ -22,7 +22,7 @@ const EditPost = ({closeModal}) => {
         //the e (event) prevents the default
         e.preventDefault();
         // call axios to post the object to my api
-        axios.put(`http://localhost:8000/api/posts/${id}`, {
+        axios.put(`http://localhost:7000/api/posts/${id}`, {
             
         })
         //on success, redirect to product list
@@ -45,7 +45,7 @@ const EditPost = ({closeModal}) => {
     }
 
     useEffect(() => {
-      axios.get(`http://localhost:8000/api/posts/${id}`)
+      axios.get(`http://localhost:7000/api/posts/${id}`)
       .then(res => {
           console.log(res);
         // bring state in
