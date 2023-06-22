@@ -43,9 +43,57 @@ const AllPosts = () => {
 
 
   return (
+    <div className='all-posts'>
+
     <div className='posts-container'>
 
       All Posts Goes HEre
+      <div className='posts-container'>
+      <Card  className="card-container">
+            <Card.Header className='card-header'>Post Header</Card.Header>
+            <Card.Body className='card-body'>
+              <Card.Title className='card-title'>Post Title</Card.Title>
+              <Card.Text className='card-text' >
+                Post Text
+              </Card.Text>
+              <Button className= '' variant="primary">Edit Post Title</Button>
+            </Card.Body>
+            <Card.Footer className="text-muted">Created Post</Card.Footer>
+      </Card>
+      <Card  className="card-container">
+            <Card.Header className='card-header'>Post Header</Card.Header>
+            <Card.Body className='card-body'>
+              <Card.Title className='card-title'>Post Title</Card.Title>
+              <Card.Text className='card-text' >
+                Post Text
+              </Card.Text>
+              <Button className= '' variant="primary">Edit Post Title</Button>
+            </Card.Body>
+            <Card.Footer className="text-muted">Created Post</Card.Footer>
+      </Card>
+      <Card  className="card-container">
+            <Card.Header className='card-header'>Post Header</Card.Header>
+            <Card.Body className='card-body'>
+              <Card.Title className='card-title'>Post Title</Card.Title>
+              <Card.Text className='card-text' >
+                Post Text
+              </Card.Text>
+              <Button className= '' variant="primary">Edit Post Title</Button>
+            </Card.Body>
+            <Card.Footer className="text-muted">Created Post</Card.Footer>
+      </Card>
+      <Card  className="card-container">
+            <Card.Header className='card-header'>Post Header</Card.Header>
+            <Card.Body className='card-body'>
+              <Card.Title className='card-title'>Post Title</Card.Title>
+              <Card.Text className='card-text' >
+                Post Text
+              </Card.Text>
+              <Button className= '' variant="primary">Edit Post Title</Button>
+            </Card.Body>
+            <Card.Footer className="text-muted">Created Post</Card.Footer>
+      </Card>
+      
 
       {/* {
         postsArray.map((onePost, index) => (
@@ -60,6 +108,10 @@ const AllPosts = () => {
             </Card.Body>
             <Card.Footer className="text-muted">Created {onePost.updatedAt}</Card.Footer>
           </Card>
+
+        )) */}
+      {/* } */}
+      </div>
 
         ))
       } */}

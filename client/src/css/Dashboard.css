@@ -6,20 +6,27 @@ body {
   }
   
 main {
-  padding: 40px 25px;
   transition: .5s ease-in-out;
   width: 100%;
+
+  margin-top: -50px;
+
 }
 
-.dash-body {
-  border: 2px dashed blue;
-}
   
+}
+.dash-body{
+  border: 2px dashed blue;
+  width: 0 auto;
+  max-height: 100%;
+  border: 2px solid green;
+}
+
   nav {
     background-image: linear-gradient(0deg,#3381b0,#87cefa);
     bottom: 0;
     box-shadow: 0 0 5px #666;
-    height: 100%;
+    height: auto;
     left: -17.5rem;
     padding-top: 38px;
     position: absolute;
