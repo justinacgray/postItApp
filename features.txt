@@ -1,0 +1,17 @@
+
+
+TODO Client
+=============
+-- Finish Functionality for ReadOne, UpdateOne, and DeleteOne 
+-- Update User Auth using context and Formik/UseForm 
+-- Filter Notes Functionality
+
+
+
+
+
+TODO Server 
+=============
+-- Update all User/Posts Controllers to try/catch async/await
+-- Change User/Posts Routes to include more protected Routes
+-- Include in Posts Controllers functionality to grab all notes for user logged in
