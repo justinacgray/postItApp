@@ -8,13 +8,11 @@ body {
 main {
   transition: .5s ease-in-out;
   width: 100%;
-
   margin-top: -50px;
 
 }
 
   
-}
 .dash-body{
   border: 2px dashed blue;
   width: 0 auto;

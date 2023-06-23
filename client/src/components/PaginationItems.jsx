@@ -1,15 +1,16 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState, useEffect} from 'react'
 import ReactPaginate from 'react-paginate';
 
 
 // https://www.npmjs.com/package/react-paginate
 
 const PaginationItems = () => {
+    const [userPostIts, setUserPostIts] = useState([])
     const [perPage, setPerPage] = useState(7);
-    // const [size, setSize] = useState(perPage);
-    const [current, setCurrent] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
+    
 
-    // const pageCount = Math.ceil(items.length / itemsPerPage);
 
 
      // Invoke when user click to request another page.
