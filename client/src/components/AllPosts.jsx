@@ -75,6 +75,7 @@ const AllPosts = () => {
           </Card>
 
         )) } 
+
         </div>
 
       <PaginationItems />
