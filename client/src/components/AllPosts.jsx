@@ -14,6 +14,7 @@ const AllPosts = () => {
   //need to use Effect to immediately the data on the page
   //need to use axios to get all products from the backend server
 
+  // todo need to update axios call to display ONLY the user that is logged in posts
   useEffect(() => {
     axios.get("http://localhost:7000/api/posts/view-all-posts", {withCredentials: true})
       .then((res) => {
@@ -75,7 +76,7 @@ const AllPosts = () => {
 
         )) } 
         </div>
-        
+
       <PaginationItems />
 
     </div>
