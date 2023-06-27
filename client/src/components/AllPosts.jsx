@@ -3,16 +3,25 @@ import axios from 'axios'
 import '../css/All_Posts.css'
 import { Button, Card} from 'react-bootstrap';
 import { PostContext } from '../context/PostContext';
-import PaginationItems from './PaginationItems'
+import ReactPaginate from 'react-paginate'
+
 
 
 const AllPosts = () => {
-
   //create an array to hold all posts
   //set State to update the page for each new postit added
   const {postsArray, setPostsArray}  = useContext(PostContext)
   //need to use Effect to immediately the data on the page
   //need to use axios to get all products from the backend server
+    const [currentPage, setCurrentPage] = useState(0);
+    const postsPerPage = 7
+    const pagesVisited = currentPage * postsArray.length
+
+    const maxPosts = pagesVisited + postsPerPage
+
+    console.log('POSTS ARR', postsArray)
+    console.log("pagesVisited",pagesVisited)
+  
 
   // todo need to update axios call to display ONLY the user that is logged in posts
   useEffect(() => {
@@ -27,58 +36,59 @@ const AllPosts = () => {
       })
   }, []);
 
-  // const removeFromDom = (postsId) => {
-  //     setPostsArray(postsArray.filter(post => posts._id !== postsId));
-  // }
+  // TODO figure out how to change the current page / when clicking prev/next it doesn't change the items on the page
+  // https://stackoverflow.com/questions/72922274/pagination-with-react-doesnt-work-all-items-are-still-displayed-on-screen
+    const displayPosts = postsArray.slice(pagesVisited, maxPosts).map((onePost, index) => {
+        console.log('one post')
+        return (
+            <div >
+                
+            {/* <div className='posts-container'> */}
+                <Card key={index} className="card-container">
+                    <Card.Header className='card-header'>{onePost.title} {onePost.dueDate}</Card.Header>
+                    <Card.Body className='card-body'>
+                        <Card.Title className='card-title'>{onePost.title}</Card.Title>
+                        <Card.Text className='card-text' >
+                            {onePost.text}
+                        </Card.Text>
+                        <Button className='' variant="primary">Edit {onePost.title}</Button>
+                    </Card.Body>
+                    <Card.Footer className="text-muted">Created {onePost.updatedAt}</Card.Footer>
+                </Card>
+            {/* </div>  */}
+            </div>
+        )
+    })
 
-  // const deleteProduct = (postsId) => {
-  //     axios.delete("http://localhost:7000/api/delete/")
-  //         .then(res => {
-  //             removeFromDom(postsId);
-  //             // navigate upon success 
-  //         })
-  //         .catch((err) => {
-  //             console.log(err);
-  //         })
-  //     }
+    const pageCount = Math.ceil(postsArray.length / postsPerPage)
 
+    // selected is the number of the page you want to move to
+    const changePage = ({selected}) => {
+      console.log("working?", selected)
+      setCurrentPage(selected)
+    }
 
   return (
     <div className='all-posts'>
       All Posts Goes HEre
 
       <div className='posts-container'>
-      {/* <Card  className="card-container">
-            <Card.Header className='card-header'>Post Header</Card.Header>
-            <Card.Body className='card-body'>
-              <Card.Title className='card-title'>Post Title</Card.Title>
-              <Card.Text className='card-text' >
-                Post Text
-              </Card.Text>
-              <Button className= '' variant="primary">Edit Post Title</Button>
-            </Card.Body>
-            <Card.Footer className="text-muted">Created Post</Card.Footer>
-      </Card> */}
-
-      {
-        postsArray.map((onePost, index) => (
-          <Card key={index} className="card-container">
-            <Card.Header className='card-header'>{onePost.title} {onePost.dueDate}</Card.Header>
-            <Card.Body className='card-body'>
-              <Card.Title className='card-title'>{onePost.title}</Card.Title>
-              <Card.Text className='card-text' >
-                {onePost.text}
-              </Card.Text>
-              <Button className= '' variant="primary">Edit {onePost.title}</Button>
-            </Card.Body>
-            <Card.Footer className="text-muted">Created {onePost.updatedAt}</Card.Footer>
-          </Card>
-
-        )) } 
+        {displayPosts}
+        <ReactPaginate 
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName ={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName = {"nextBttn"}
+        disabledClassName = {"paginationDisabled"}
+        activeClassName={"paginationActive"}
+        />
 
         </div>
 
-      <PaginationItems />
+  
 
     </div>
   )
